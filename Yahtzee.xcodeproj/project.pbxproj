@@ -13,6 +13,9 @@
 		9B9B324C1C51723C00D83501 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 9B9B324A1C51723C00D83501 /* Main.storyboard */; };
 		9B9B324E1C51723C00D83501 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 9B9B324D1C51723C00D83501 /* Assets.xcassets */; };
 		9B9B32511C51723C00D83501 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 9B9B324F1C51723C00D83501 /* LaunchScreen.storyboard */; };
+		9B9B325A1C51725B00D83501 /* DieLabel.m in Sources */ = {isa = PBXBuildFile; fileRef = 9B9B32591C51725B00D83501 /* DieLabel.m */; };
+		9B9B325F1C517D2800D83501 /* GameViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9B9B325E1C517D2800D83501 /* GameViewController.m */; };
+		9B9B32651C51985D00D83501 /* dice.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 9B9B32641C51985D00D83501 /* dice.ttf */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -26,6 +29,11 @@
 		9B9B324D1C51723C00D83501 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		9B9B32501C51723C00D83501 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		9B9B32521C51723C00D83501 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		9B9B32581C51725B00D83501 /* DieLabel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DieLabel.h; sourceTree = "<group>"; };
+		9B9B32591C51725B00D83501 /* DieLabel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DieLabel.m; sourceTree = "<group>"; };
+		9B9B325D1C517D2800D83501 /* GameViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GameViewController.h; sourceTree = "<group>"; };
+		9B9B325E1C517D2800D83501 /* GameViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GameViewController.m; sourceTree = "<group>"; };
+		9B9B32641C51985D00D83501 /* dice.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = dice.ttf; path = /Users/chriserdos/mm/Yahtzee/dice.ttf; sourceTree = "<absolute>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -44,6 +52,7 @@
 			children = (
 				9B9B32401C51723C00D83501 /* Yahtzee */,
 				9B9B323F1C51723C00D83501 /* Products */,
+				9B9B32641C51985D00D83501 /* dice.ttf */,
 			);
 			sourceTree = "<group>";
 		};
@@ -58,14 +67,18 @@
 		9B9B32401C51723C00D83501 /* Yahtzee */ = {
 			isa = PBXGroup;
 			children = (
-				9B9B32441C51723C00D83501 /* AppDelegate.h */,
-				9B9B32451C51723C00D83501 /* AppDelegate.m */,
+				9B9B324A1C51723C00D83501 /* Main.storyboard */,
+				9B9B325D1C517D2800D83501 /* GameViewController.h */,
+				9B9B325E1C517D2800D83501 /* GameViewController.m */,
+				9B9B32581C51725B00D83501 /* DieLabel.h */,
+				9B9B32591C51725B00D83501 /* DieLabel.m */,
 				9B9B32471C51723C00D83501 /* ViewController.h */,
 				9B9B32481C51723C00D83501 /* ViewController.m */,
-				9B9B324A1C51723C00D83501 /* Main.storyboard */,
 				9B9B324D1C51723C00D83501 /* Assets.xcassets */,
 				9B9B324F1C51723C00D83501 /* LaunchScreen.storyboard */,
 				9B9B32521C51723C00D83501 /* Info.plist */,
+				9B9B32441C51723C00D83501 /* AppDelegate.h */,
+				9B9B32451C51723C00D83501 /* AppDelegate.m */,
 				9B9B32411C51723C00D83501 /* Supporting Files */,
 			);
 			path = Yahtzee;
@@ -105,6 +118,9 @@
 		9B9B32361C51723C00D83501 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
+				KnownAssetTags = (
+					dice,
+				);
 				LastUpgradeCheck = 0720;
 				ORGANIZATIONNAME = "Chris Erdos";
 				TargetAttributes = {
@@ -137,6 +153,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				9B9B32511C51723C00D83501 /* LaunchScreen.storyboard in Resources */,
+				9B9B32651C51985D00D83501 /* dice.ttf in Resources */,
 				9B9B324E1C51723C00D83501 /* Assets.xcassets in Resources */,
 				9B9B324C1C51723C00D83501 /* Main.storyboard in Resources */,
 			);
@@ -149,9 +166,11 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				9B9B325F1C517D2800D83501 /* GameViewController.m in Sources */,
 				9B9B32491C51723C00D83501 /* ViewController.m in Sources */,
 				9B9B32461C51723C00D83501 /* AppDelegate.m in Sources */,
 				9B9B32431C51723C00D83501 /* main.m in Sources */,
+				9B9B325A1C51725B00D83501 /* DieLabel.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -300,6 +319,7 @@
 				9B9B32571C51723C00D83501 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
