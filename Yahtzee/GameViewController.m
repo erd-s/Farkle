@@ -44,6 +44,9 @@
 			[die rollDie];
 		}
 	}
+	for (DieLabel *die in self.arrayWithSelectedDice) {
+		die.locked = YES;
+	}
 }
 
 
@@ -66,7 +69,7 @@
 			}
 		}
 		
-	}
+}
 }
 
 
