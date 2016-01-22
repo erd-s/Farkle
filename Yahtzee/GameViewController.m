@@ -18,8 +18,6 @@
 @property (weak, nonatomic) IBOutlet DieLabel *dieSix;
 @property (weak, nonatomic) IBOutlet UILabel *playerScore;
 @property NSMutableArray *diceArray;
-@property NSMutableArray *arrayWithUnselectedDice;
-@property NSMutableArray *arrayWithSelectedDice;
 @property int turnNumber;
 @end
 
@@ -32,8 +30,6 @@
 		die.delegate = self;
 		self.turnNumber = 0;
 	}
-	self.arrayWithUnselectedDice = [NSMutableArray new];
-	self.arrayWithSelectedDice = [NSMutableArray new];
 
 }
 
@@ -44,15 +40,15 @@
 			[die rollDie];
 		}
 	}
-	for (DieLabel *die in self.arrayWithSelectedDice) {
-		die.locked = YES;
+	for (DieLabel *die in self.diceArray) {
+		if (([die.yOrN isEqualToString:@"y"]) && (die.locked == NO)) {
+			die.locked = YES;
+		}
 	}
 }
 
 
 -(void)DieLabel:(id)die onSelectStateDidChange:(NSString *)stateString {
-	[self.arrayWithUnselectedDice removeAllObjects];														//array with unselected dice has to be emptied & refilled each selection
-	[self.arrayWithSelectedDice removeAllObjects];
 	if (self.turnNumber == 0) {																				//turn number 0, must roll all dice
 		for (DieLabel *die in self.diceArray) {
 			die.yOrN = @"n";
@@ -62,10 +58,8 @@
 		for (DieLabel *die in self.diceArray) {
 			if ([die.yOrN isEqualToString:@"y"]) {
 				die.backgroundColor = [UIColor redColor];
-				[self.arrayWithSelectedDice addObject:die];
 			} else {
 				die.backgroundColor = [UIColor clearColor];
-				[self.arrayWithUnselectedDice addObject:die];
 			}
 		}
 		

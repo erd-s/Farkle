@@ -32,6 +32,9 @@ return self;
 
 
 -(void)tapHandler:(UIGestureRecognizer *)gestureRecognizer {
+	if (self.locked == YES) {
+		return;
+	}
 	
 	if ([self.yOrN isEqualToString:@"y"]) {
 		self.yOrN = @"n";
