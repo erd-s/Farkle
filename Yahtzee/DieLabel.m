@@ -45,7 +45,7 @@ return self;
 }
 
 -(void)rollDie {
-	self.text = [NSString stringWithFormat:@"%d", (arc4random_uniform(5) + 1)];
+	self.text = [NSString stringWithFormat:@"%d", (arc4random_uniform(6) + 1)];
 }
 
 

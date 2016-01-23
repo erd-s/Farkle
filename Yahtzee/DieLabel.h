@@ -7,7 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
-@protocol DieLabelDelate <NSObject>
+@protocol DieLabelDelegate <NSObject>
 
 -(void)DieLabel:(id)die onSelectStateDidChange:(NSString *)stateString;
 
@@ -15,7 +15,7 @@
 
 @interface DieLabel : UILabel
 @property NSString *yOrN;
-@property (nonatomic, assign) id <DieLabelDelate> delegate;
+@property (nonatomic, assign) id <DieLabelDelegate> delegate;
 @property BOOL locked;
 
 
