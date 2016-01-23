@@ -18,6 +18,7 @@
 @property (weak, nonatomic) IBOutlet DieLabel *dieSix;
 @property (weak, nonatomic) IBOutlet UILabel *playerScore;
 @property (weak, nonatomic) IBOutlet UILabel *bank;
+@property (weak, nonatomic) IBOutlet UILabel *nameLabel;
 @property NSMutableArray *diceArray;
 @property NSMutableArray *arrayWithOnes;
 @property NSMutableArray *arrayWithTwos;
@@ -25,11 +26,12 @@
 @property NSMutableArray *arrayWithFours;
 @property NSMutableArray *arrayWithFives;
 @property NSMutableArray *arrayWithSixes;
-@property int turnNumber;
 @property NSUInteger points;
 @property NSUInteger pointsHolderOne;
 @property NSUInteger pointsHolderTwo;
 @property NSUInteger bankedPoints;
+@property int turnNumber;
+
 @end
 
 @implementation GameViewController
@@ -41,16 +43,15 @@
 		die.delegate = self;
 		self.turnNumber = 0;
 	}
-	
 	self.arrayWithOnes = [NSMutableArray new];
 	self.arrayWithTwos = [NSMutableArray new];
 	self.arrayWithThrees = [NSMutableArray new];
 	self.arrayWithFours = [NSMutableArray new];
 	self.arrayWithFives = [NSMutableArray new];
 	self.arrayWithSixes = [NSMutableArray new];
-	NSLog(@"%lu", (unsigned long)self.bankedPoints);
 	self.pointsHolderOne = 0;
 	self.pointsHolderTwo = 0;
+	self.nameLabel.text = self.player.name;
 }
 
 - (IBAction)onRollTouchedUpInside:(UIButton *)sender {
@@ -140,7 +141,8 @@
 		||	(threes == 3 && sixes == 3)
 		||	(fours == 3 && fives == 3)
 		||	(fours == 3 && fives == 3)
-		||	(fives == 3 && sixes == 3)) { self.points = self.points + 2500;}
+		||	(fives == 3 && sixes == 3)) { self.points = self.points + 2500;
+		NSLog(@"This is double triples");}
 	
 //if 1-6 straight
 	else if (ones == 1 && twos == 1 && threes == 1 && fours == 1 && fives == 1 && sixes == 1) {self.points = self.points + 1500;
@@ -244,6 +246,7 @@
 	else if (threes == 4) {self.points = self.points + 1000;}
 	else if (threes == 5) {self.points = self.points + 2000;}
 	else if (threes == 6) {self.points = self.points + 3000;}
+		NSLog(@"This is triples, quads, sixes, or single ones or fives");
 }
 	
 	
@@ -348,6 +351,7 @@
 		else if (sixes == 6) {}
 		
 		else if (fives == 1) {}
+		else if (fives == 2) {}
 		else if (fives == 3) {}
 		else if (fives == 4) {}
 		else if (fives == 5) {}
@@ -360,6 +364,7 @@
 		else if (fours == 6) {}
 		
 		else if (ones == 1) {}
+		else if (ones == 2)	{}
 		else if (ones == 3) {}
 		else if (ones == 4) {}
 		else if (ones == 5) {}
@@ -378,7 +383,16 @@
 		else if (threes == 6) {}
 		
 		
-		else { NSLog(@"You Farkled!");}
+		else {
+			
+			UIAlertController *youFarkledYaBish = [UIAlertController alertControllerWithTitle:@"You Farkled!" message:@"Sorry about that." preferredStyle:UIAlertControllerStyleAlert];
+			UIAlertAction *donezo = [UIAlertAction actionWithTitle:@"Go Back" style:UIAlertActionStyleDefault handler:^(UIAlertAction *action) {
+				[self performSegueWithIdentifier:@"unwind" sender:self];
+			}];
+			
+			[youFarkledYaBish addAction:donezo];
+			[self presentViewController:youFarkledYaBish animated:YES completion:nil];
+		}
 	}
 
 -(void) removeObjectsInArrayWithCounts {
@@ -390,6 +404,19 @@
 	[self.arrayWithSixes removeAllObjects];
 }
 
+- (IBAction)onWalkButtonTapped:(UIButton *)sender {
+	self.player.score = self.player.score + self.pointsHolderTwo + self.pointsHolderOne;
+	NSString *youScored = [NSString stringWithFormat:@"You scored %lu points!", (unsigned long)self.pointsHolderOne + self.pointsHolderTwo];
+	
+	UIAlertController *summary = [UIAlertController alertControllerWithTitle:@"Well done!" message:youScored preferredStyle:UIAlertControllerStyleAlert];
+	UIAlertAction *ok = [UIAlertAction actionWithTitle:@"Ok" style:UIAlertActionStyleDefault handler:^(UIAlertAction *action) {
+		[self performSegueWithIdentifier:@"unwind" sender:self];
+	}];
+	
+	[summary addAction:ok];
+	[self presentViewController:summary animated:YES completion:nil];
+	
+}
 
 
 

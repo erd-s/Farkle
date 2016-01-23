@@ -7,6 +7,9 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "Player.h"
 
 @interface GameViewController : UIViewController
+@property Player *player;
+
 @end

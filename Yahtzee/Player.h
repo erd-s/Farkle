@@ -9,5 +9,7 @@
 #import <Foundation/Foundation.h>
 
 @interface Player : NSObject
+@property NSString *name;
+@property NSUInteger score;
 
 @end

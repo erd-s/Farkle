@@ -7,8 +7,13 @@
 //
 
 #import "PlayersViewController.h"
+#import "Player.h"
+#import "GameViewController.h"
 
-@interface PlayersViewController ()
+@interface PlayersViewController () <UITableViewDataSource, UITableViewDelegate>
+@property (weak, nonatomic) IBOutlet UITableView *tableView;
+@property NSMutableArray *playersArray;
+
 
 @end
 
@@ -16,22 +21,65 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    // Do any additional setup after loading the view.
+	self.playersArray = [NSMutableArray new];
 }
 
-- (void)didReceiveMemoryWarning {
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
+-(void)viewWillAppear:(BOOL)animated {
+	[self.tableView reloadData];
+
+
+}
+- (IBAction)onAddButtonTapped:(UIBarButtonItem *)sender {
+	Player *player = [Player new];
+	UIAlertController *addPlayer = [UIAlertController alertControllerWithTitle:@"Add Player" message:@"Please type player name below." preferredStyle:(UIAlertControllerStyleAlert)];
+	[addPlayer addTextFieldWithConfigurationHandler:^(UITextField * textField) {
+		textField.placeholder = @"Insert player name.";
+	}];
+	UIAlertAction *add = [UIAlertAction actionWithTitle:@"Add Player" style:UIAlertActionStyleDefault handler:^(UIAlertAction *action) {
+		if ([addPlayer.textFields[0].text isEqualToString:@""]) {
+		} else {
+		player.name = addPlayer.textFields[0].text;
+		[self.playersArray addObject:player];
+		[self.tableView reloadData];
+		}
+	}];
+	UIAlertAction *cancel = [UIAlertAction actionWithTitle:@"Cancel" style:UIAlertActionStyleCancel handler:nil];
+
+	
+	
+	[addPlayer addAction:add];
+	[addPlayer addAction:cancel];
+	[addPlayer.view sizeToFit];
+	[self presentViewController:addPlayer animated:YES completion:nil];
 }
 
-/*
-#pragma mark - Navigation
-
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
+-(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
+	UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"Cell"];
+	Player *player = [self.playersArray objectAtIndex:indexPath.row];
+	
+	
+	cell.textLabel.text = player.name;
+	cell.detailTextLabel.text = [NSString stringWithFormat:@"Score: %lu", (long)player.score];
+	
+	
+	return cell;
 }
-*/
+
+-(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
+	return self.playersArray.count;
+}
+
+
+-(void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
+	GameViewController *dvc = [segue destinationViewController];
+	NSIndexPath *indexPath = [self.tableView indexPathForCell:sender];
+	
+	dvc.player = [self.playersArray objectAtIndex:indexPath.row];
+}
+
+-(IBAction) unwind:(UIStoryboardSegue *)segue {
+	
+}
+
 
 @end
