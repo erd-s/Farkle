@@ -65,12 +65,7 @@
 			die.locked = YES;
 		}
 	}
-	[self.arrayWithOnes removeAllObjects];
-	[self.arrayWithTwos removeAllObjects];
-	[self.arrayWithThrees removeAllObjects];
-	[self.arrayWithFours removeAllObjects];
-	[self.arrayWithFives removeAllObjects];
-	[self.arrayWithSixes removeAllObjects];
+	[self removeObjectsInArrayWithCounts];
 	self.pointsHolderTwo = self.pointsHolderTwo + self.pointsHolderOne;
 	self.bank.text = [NSString stringWithFormat:@"Bank: %lu", self.pointsHolderTwo];
 	self.playerScore.text = @"Current Score: 0";
@@ -79,12 +74,7 @@
 
 
 -(void)DieLabel:(id)die onSelectStateDidChange:(NSString *)stateString {
-	[self.arrayWithOnes removeAllObjects];
-	[self.arrayWithTwos removeAllObjects];
-	[self.arrayWithThrees removeAllObjects];
-	[self.arrayWithFours removeAllObjects];
-	[self.arrayWithFives removeAllObjects];
-	[self.arrayWithSixes removeAllObjects];
+	[self removeObjectsInArrayWithCounts];
 
 		if (self.turnNumber == 0) {
 			for (DieLabel *die in self.diceArray) {
@@ -128,13 +118,7 @@
 			}
 	}
 	}
-//	
-//	NSLog(@"%@", self.arrayWithOnes);
-//	NSLog(@"%@", self.arrayWithTwos);
-//	NSLog(@"%@", self.arrayWithThrees);
-//	NSLog(@"%@", self.arrayWithFours);
-//	NSLog(@"%@", self.arrayWithFives);
-//	NSLog(@"%@", self.arrayWithSixes);
+
 	NSUInteger ones = self.arrayWithOnes.count;
 	NSUInteger twos = self.arrayWithTwos.count;
 	NSUInteger threes = self.arrayWithThrees.count;
@@ -397,7 +381,14 @@
 		else { NSLog(@"You Farkled!");}
 	}
 
-
+-(void) removeObjectsInArrayWithCounts {
+	[self.arrayWithOnes removeAllObjects];
+	[self.arrayWithTwos removeAllObjects];
+	[self.arrayWithThrees removeAllObjects];
+	[self.arrayWithFours removeAllObjects];
+	[self.arrayWithFives removeAllObjects];
+	[self.arrayWithSixes removeAllObjects];
+}
 
 
 
