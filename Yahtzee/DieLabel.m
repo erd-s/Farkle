@@ -25,6 +25,7 @@
 		self.gestureRecognizers = @[tap];
 		tap.delegate = self;
 		self.font = [UIFont fontWithName:@"Dice" size:60];
+		self.contributedScore = NO;
 	}
 return self;
 }

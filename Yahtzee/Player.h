@@ -11,5 +11,6 @@
 @interface Player : NSObject
 @property NSString *name;
 @property NSUInteger score;
+@property NSUInteger turnsTaken;
 
 @end

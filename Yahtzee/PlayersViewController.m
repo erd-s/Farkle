@@ -34,6 +34,7 @@
 	UIAlertController *addPlayer = [UIAlertController alertControllerWithTitle:@"Add Player" message:@"Please type player name below." preferredStyle:(UIAlertControllerStyleAlert)];
 	[addPlayer addTextFieldWithConfigurationHandler:^(UITextField * textField) {
 		textField.placeholder = @"Insert player name.";
+//		textField.textInputMode.
 	}];
 	UIAlertAction *add = [UIAlertAction actionWithTitle:@"Add Player" style:UIAlertActionStyleDefault handler:^(UIAlertAction *action) {
 		if ([addPlayer.textFields[0].text isEqualToString:@""]) {
@@ -59,7 +60,7 @@
 	
 	
 	cell.textLabel.text = player.name;
-	cell.detailTextLabel.text = [NSString stringWithFormat:@"Score: %lu", (long)player.score];
+	cell.detailTextLabel.text = [NSString stringWithFormat:@"Score: %lu, Turns taken: %lu", (long)player.score, (long)player.turnsTaken];
 	
 	
 	return cell;

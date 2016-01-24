@@ -17,6 +17,8 @@
 @property NSString *yOrN;
 @property (nonatomic, assign) id <DieLabelDelegate> delegate;
 @property BOOL locked;
+@property BOOL contributedScore;
+
 
 
 
