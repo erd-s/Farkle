@@ -57,10 +57,23 @@
 	self.nameLabel.text = self.player.name;
 	self.rollButton.layer.cornerRadius = 5;
 	self.walkButton.layer.cornerRadius = 5;
-
+	
 }
 
 - (IBAction)onRollTouchedUpInside:(UIButton *)sender {
+	[self.rollButton setTitle:@"Roll" forState:UIControlStateNormal];
+
+//		if (self.turnNumber != 0
+//		&&	[[[self.diceArray objectAtIndex:0] yOrN] isEqualToString:@"n"]
+//		&& [[[self.diceArray objectAtIndex:1] yOrN] isEqualToString:@"n"]
+//		&& [[[self.diceArray objectAtIndex:2] yOrN] isEqualToString:@"n"]
+//		&& [[[self.diceArray objectAtIndex:3] yOrN] isEqualToString:@"n"]
+//		&& [[[self.diceArray objectAtIndex:4] yOrN] isEqualToString:@"n"]
+//		&& [[[self.diceArray objectAtIndex:5] yOrN] isEqualToString:@"n"])
+//		{
+//		return;
+//	} else {
+	
 	self.turnNumber = self.turnNumber + 1;
 	for (DieLabel *die in self.diceArray) {
 		if ([die.yOrN  isEqual: @"n"]) {
@@ -82,7 +95,7 @@
 	self.pointsHolderTwo = (self.pointsHolderTwo + self.pointsHolderOne);
 	self.bank.text = [NSString stringWithFormat:@"Bank: %lu", (unsigned long)self.pointsHolderTwo];
 	self.playerScore.text = @"Current Score: 0";
-	
+	self.pointsHolderOne = 0;
 	
 	int numberOfDieLocked = 0;
 	for (DieLabel *die in self.diceArray) {
@@ -100,9 +113,9 @@
 
 -(void)DieLabel:(id)die onSelectStateDidChange:(NSString *)stateString {
 	[self removeObjectsInArrayWithCounts];
-
-		if (self.turnNumber == 0) {
-			for (DieLabel *die in self.diceArray) {
+	
+	if (self.turnNumber == 0) {
+		for (DieLabel *die in self.diceArray) {
 			die.yOrN = @"n";
 		}
 		return;
@@ -111,17 +124,17 @@
 			if ([die.yOrN isEqualToString:@"y"]) {
 				die.backgroundColor = [UIColor redColor];
 				
-				}
-				else {
+			}
+			else {
 				die.backgroundColor = [UIColor clearColor];
+			}
 		}
 	}
-}
 	[self checkWins];
 	self.playerScore.text = [NSString stringWithFormat:@"Current Score:%lu", (unsigned long)self.points];
 	self.pointsHolderOne = self.points;
-	
 }
+
 
 -(void) checkWins {
 	self.points = 0;
@@ -776,9 +789,9 @@
 		if (fives == 1) {self.points = self.points + 50;
 			for (DieLabel *die in self.arrayWithFives) {
 				die.contributedScore = YES;}}
-		else if (fives == 2) {self.points = self.points + 0;
-			DieLabel *die = [self.arrayWithFives objectAtIndex:0];
-			die.contributedScore = YES;}
+		else if (fives == 2) {self.points = self.points + 100;
+			for (DieLabel *die in self.arrayWithFives) {
+				die.contributedScore = YES;}}
 		else if (fives == 3) {self.points = self.points + 500;
 			for (DieLabel *die in self.arrayWithFives) {
 				die.contributedScore = YES;}}
@@ -808,10 +821,9 @@
 		if (ones == 1) {self.points = self.points + 100;
 			for (DieLabel *die in self.arrayWithOnes) {
 				die.contributedScore = YES;}}
-		else if (ones == 2) {self.points = self.points + 0;
-			DieLabel *die = [self.arrayWithOnes objectAtIndex:0];
-			die.contributedScore = YES;
-			;}
+		else if (ones == 2) {self.points = self.points + 200;
+			for (DieLabel *die in self.arrayWithOnes) {
+				die.contributedScore = YES;}}
 		else if (ones == 3) {self.points = self.points + 300;
 			for (DieLabel *die in self.arrayWithOnes) {
 				die.contributedScore = YES;}}
@@ -932,7 +944,7 @@
 			 || (sixes == 4 && threes == 2)
 			 || (sixes == 4 && fours == 2)
 			 || (sixes == 4 && fives == 2)) { }
-		else if (    (ones == 2 && twos == 2 && threes == 2)
+	else if (    (ones == 2 && twos == 2 && threes == 2)
 			 ||    (ones == 2 && threes == 2 && fours == 2)
 			 ||    (ones == 2 && fours == 2 && fives == 2)
 			 ||    (ones == 2 && fives == 2 && sixes == 2)
@@ -951,57 +963,57 @@
 			 ||    (threes == 2 && fives == 2 && sixes ==2)
 			 ||    (threes == 2 && sixes == 2 && fours ==2)
 			 ||    (fours == 2 && fives == 2 && sixes ==2)) {}
-
-		else if (sixes == 3) {}
-		else if (sixes == 4) {}
-		else if (sixes == 5) {}
-		else if (sixes == 6) {}
 	
-		else if (fives == 1) {}
-		else if (fives == 2) {}
-		else if (fives == 3) {}
-		else if (fives == 4) {}
-		else if (fives == 5) {}
-		else if (fives == 6) {}
+	else if (sixes == 3) {}
+	else if (sixes == 4) {}
+	else if (sixes == 5) {}
+	else if (sixes == 6) {}
 	
-
-		else if (fours == 3) {}
-		else if (fours == 4) {}
-		else if (fours == 5) {}
-		else if (fours == 6) {}
-	
-		else if (ones == 1) {}
-		else if (ones == 2)	{}
-		else if (ones == 3) {}
-		else if (ones == 4) {}
-		else if (ones == 5) {}
-		else if (ones == 6) {}
-	
-
-		else if (twos == 3) {}
-		else if (twos == 4) {}
-		else if (twos == 5) {}
-		else if (twos == 6) {}
-	
-
-		else if (threes == 3) {}
-		else if (threes == 4) {}
-		else if (threes == 5) {}
-		else if (threes == 6) {}
+	else if (fives == 1) {}
+	else if (fives == 2) {}
+	else if (fives == 3) {}
+	else if (fives == 4) {}
+	else if (fives == 5) {}
+	else if (fives == 6) {}
 	
 	
-		else {
-			
-			UIAlertController *youFarkledYaBish = [UIAlertController alertControllerWithTitle:@"You Farkled!" message:@"Sorry about that." preferredStyle:UIAlertControllerStyleAlert];
-			UIAlertAction *donezo = [UIAlertAction actionWithTitle:@"Go Back" style:UIAlertActionStyleDefault handler:^(UIAlertAction *action) {
-				[self performSegueWithIdentifier:@"unwind" sender:self];
-				self.player.turnsTaken = self.player.turnsTaken + 1;
-			}];
-			
-			[youFarkledYaBish addAction:donezo];
-			[self presentViewController:youFarkledYaBish animated:YES completion:nil];
-		}
+	else if (fours == 3) {}
+	else if (fours == 4) {}
+	else if (fours == 5) {}
+	else if (fours == 6) {}
+	
+	else if (ones == 1) {}
+	else if (ones == 2)	{}
+	else if (ones == 3) {}
+	else if (ones == 4) {}
+	else if (ones == 5) {}
+	else if (ones == 6) {}
+	
+	
+	else if (twos == 3) {}
+	else if (twos == 4) {}
+	else if (twos == 5) {}
+	else if (twos == 6) {}
+	
+	
+	else if (threes == 3) {}
+	else if (threes == 4) {}
+	else if (threes == 5) {}
+	else if (threes == 6) {}
+	
+	
+	else {
+		
+		UIAlertController *youFarkledYaBish = [UIAlertController alertControllerWithTitle:@"You Farkled!" message:@"Sorry about that." preferredStyle:UIAlertControllerStyleAlert];
+		UIAlertAction *donezo = [UIAlertAction actionWithTitle:@"Go Back" style:UIAlertActionStyleDefault handler:^(UIAlertAction *action) {
+			[self performSegueWithIdentifier:@"unwind" sender:self];
+			self.player.turnsTaken = self.player.turnsTaken + 1;
+		}];
+		
+		[youFarkledYaBish addAction:donezo];
+		[self presentViewController:youFarkledYaBish animated:YES completion:nil];
 	}
+}
 
 -(void) removeObjectsInArrayWithCounts {
 	
@@ -1035,20 +1047,20 @@
 	UIAlertController *hotDice = [UIAlertController alertControllerWithTitle:@"Hot Dice!" message:@"You have hot dice, your score will be banked and you may roll again." preferredStyle:UIAlertControllerStyleAlert];
 	UIAlertAction *ok = [UIAlertAction actionWithTitle:@"Awesome!" style:UIAlertActionStyleCancel handler:^(UIAlertAction *action) {
 		for (DieLabel *die in self.diceArray) {
-			die.yOrN = @"n";
-			die.contributedScore = NO;
-			die.locked = NO;
 			[die rollDie];
-			[self checkFarkle];
+			die.yOrN = @"n";
+			die.locked = NO;
+			die.contributedScore = NO;
 			die.backgroundColor = [UIColor clearColor];
 		}
+		[self checkFarkle];
 		[self removeObjectsInArrayWithCounts];
 	}];
 	
 	[hotDice addAction:ok];
 	[self presentViewController:hotDice animated:YES completion:nil];
 	
-
+	
 }
 
 
